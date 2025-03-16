@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Scrolling Animation Website</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #ffd6e0, #fbc6ff, #c9e4ff, #ffe6cc);
+      background-size: 400% 400%;
+      animation: vibrantBackground 20s ease infinite;
+      scroll-behavior: smooth;
+      color: #333;
+    }
+
+    @keyframes vibrantBackground {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.9);
+      z-index: 999;
+      padding: 10px 0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      margin: 0;
+      padding: 0;
+      gap: 20px;
+    }
+
+    .nav ul li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    .nav ul li a:hover {
+      color: #ff69b4;
+    }
+
+    section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 20px 40px;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.6s ease-in-out;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .intro img {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      border: 4px solid #ff69b4;
+      object-fit: cover;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #222;
+    }
+
+    .items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .item {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 15px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      max-width: 200px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .item:hover {
+      transform: scale(1.05);
+    }
+
+    .item img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    .item p {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+      display: none;
+      z-index: 1000;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translate(-50%, -60%); }
+      to { opacity: 1; transform: translate(-50%, -50%); }
+    }
+
+    .popup h3 {
+      margin-bottom: 10px;
+    }
+
+    .popup button {
+      margin-top: 10px;
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    @media screen and (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+      .item {
+        max-width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="nav">
+    <ul>
+      <li><a href="#intro">Intro</a></li>
+      <li><a href="#movies">Movies</a></li>
+      <li><a href="#books">Books</a></li>
+      <li><a href="#places">Places</a></li>
+      <li><a href="#food">Food</a></li>
+    </ul>
+  </div>
+
+  <div class="popup" id="popup">
+    <h3 id="popupTitle"></h3>
+    <p id="popupText"></p>
+    <button onclick="closePopup()">Close</button>
+  </div>
+
+  <section class="intro" id="intro">
+    <img src="nini.jpg" alt="Profile Picture" />
+    <h2>Yello I just want to tell you some facts that you should except whether you like it or not.You are amazing. You are caring.You give your best to every task that is given.You are sensitive.Your are pretty and beautiful and lastly <b>You are my sister from another mother.</b>I wish i could write more but then this infinte scrollable page wont be enough and <b>You will always be the friend that i will never forget in my life</b></h2>
+    <p>Scroll down to see your favorite things</p>
+  </section>
+
+  <section id="movies">
+    <h1>Favorite Movies</h1>
+    <div class="items">
+      <div class="item" onclick="showPopup('Harry Potter', 'A magical fantasy movie loved by millions.')">
+        <img src="Hp.jpg" alt="Harry Potter" />
+        <p>Harry Potter</p>
+      </div>
+      <div class="item" onclick="showPopup('Sholay', 'A classic Bollywood action-drama.')">
+        <img src="Sholay.jpg" alt="Sholay" />
+        <p>Sholay</p>
+      </div>
+      <div class="item" onclick="showPopup('Hum Aapke Hain Koun', 'A heartwarming family drama.')">
+        <img src="Aapke hain kaun.jpg" alt="Aapke Hain Koun" />
+        <p>Aapke Hain Koun</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="books">
+    <h1>Favorite Books</h1>
+    <div class="items">
+      <div class="item" onclick="showPopup('Thea Stilton', 'An adventurous series loved by many young readers.')">
+        <img src="Ts.jpg" alt="Thea Stilton" />
+        <p>Thea Stilton</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="places">
+    <h1>Favorite Places</h1>
+    <div class="items">
+      <div class="item" onclick="showPopup('Vrindavan Gardens', 'Beautifully designed gardens in Mysore.')">
+        <img src="Vg.jpg" alt="Vrindavan Gardens" />
+        <p>Vrindavan Gardens</p>
+      </div>
+      <div class="item" onclick="showPopup('Dwarka', 'A sacred pilgrimage city.')">
+        <img src="Dwarka.jpg" alt="Dwarka" />
+        <p>Dwarka</p>
+      </div>
+      <div class="item" onclick="showPopup('Jagannath Puri', 'Famous for the Jagannath temple.')">
+        <img src="JPt.jpg" alt="Jagannath Puri" />
+        <p>Jagannath Puri</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="food">
+    <h1>Favorite Food</h1>
+    <div class="items">
+      <div class="item" onclick="showPopup('Dal Bati', 'Traditional Rajasthani dish.')">
+        <img src="Db.jpg" alt="Dal Bati" />
+        <p>Dal Bati</p>
+      </div>
+      <div class="item" onclick="showPopup('Paneer Butter Masala', 'Creamy and spicy paneer delight.')">
+        <img src="PBM.jpg" alt="Paneer Butter Masala" />
+        <p>Paneer Butter Masala</p>
+      </div>
+      <div class="item" onclick="showPopup('Naan', 'Classic Indian flatbread.')">
+        <img src="Naan.jpg" alt="Naan" />
+        <p>Naan</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h1 class="final-heading"><b><u> you for being my Best friend Nini💖</u></b></h1>
+  </section>
+
+  <script>
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    });
+
+    document.querySelectorAll('section').forEach(section => {
+      observer.observe(section);
+    });
+
+    function showPopup(title, text) {
+      document.getElementById('popupTitle').innerText = title;
+      document.getElementById('popupText').innerText = text;
+      document.getElementById('popup').style.display = 'block';
+    }
+
+    function closePopup() {
+      document.getElementById('popup').style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>
